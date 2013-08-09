@@ -49,6 +49,7 @@ module Clearance
           unless: :email_optional?
 
         validates :password, presence: true, unless: :skip_password_validation?
+        validates :remember_token, presence: true
       end
     end
 
@@ -57,7 +58,7 @@ module Clearance
 
       included do
         before_validation :normalize_email
-        before_create :generate_remember_token
+        before_validation :generate_remember_token, on: :create
       end
     end
 
